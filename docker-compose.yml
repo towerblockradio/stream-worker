@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  stream-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: towerblock-stream-worker
+    restart: unless-stopped
+    ports:
+      - "3100:3100"
+    volumes:
+      # Persist assets and logs across container restarts
+      - worker-assets:/app/assets
+      - worker-logs:/app/logs
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - LOG_DIR=/app/logs
+      - ASSET_DIR=/app/assets
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "5"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+volumes:
+  worker-assets:
+  worker-logs:

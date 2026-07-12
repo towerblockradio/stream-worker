@@ -1,0 +1,19 @@
+{
+  "name": "towerblock-stream-worker",
+  "version": "1.0.0",
+  "description": "Persistent broadcast worker that converts Tower Block Radio audio into a Twitch-compatible video stream",
+  "type": "module",
+  "main": "src/orchestrator.js",
+  "scripts": {
+    "start": "node src/orchestrator.js",
+    "dev": "node --watch src/orchestrator.js",
+    "test": "node --test src/test/"
+  },
+  "dependencies": {
+    "socket.io-client": "^4.7.5",
+    "express": "^4.19.2",
+    "winston": "^3.13.0",
+    "dotenv": "^16.4.5",
+    "node-fetch": "^3.3.2"
+  }
+}

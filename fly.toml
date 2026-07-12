@@ -1,0 +1,20 @@
+app = "towerblock-stream-worker"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[http_service]
+  internal_port = 3100
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = false
+  min_machines_running = 1
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 512
+
+[mounts]
+  source = "worker_assets"
+  destination = "/app/assets"
