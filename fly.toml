@@ -1,20 +1,26 @@
-app = "towerblock-stream-worker"
+# fly.toml app configuration file generated for stream-worker on 2026-07-12T10:59:17Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'stream-worker'
+primary_region = 'lhr'
 
 [build]
-  dockerfile = "Dockerfile"
+  dockerfile = 'Dockerfile'
+
+[[mounts]]
+  source = 'worker_assets'
+  destination = '/app/assets'
 
 [http_service]
-  internal_port = 3100
+  internal_port = 8080
   force_https = true
-  auto_stop_machines = false
+  auto_stop_machines = 'off'
   auto_start_machines = false
   min_machines_running = 1
 
 [[vm]]
-  cpu_kind = "shared"
+  cpu_kind = 'shared'
   cpus = 1
   memory_mb = 512
-
-[mounts]
-  source = "worker_assets"
-  destination = "/app/assets"
